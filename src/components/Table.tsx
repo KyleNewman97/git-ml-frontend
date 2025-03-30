@@ -1,3 +1,5 @@
+import { classNames } from "../utils/utils-string";
+
 export const Table = <T,>({
   columnNames,
   className,
@@ -6,7 +8,9 @@ export const Table = <T,>({
   className?: string;
 }) => {
   return (
-    <table className={"border-separate border-spacing-0 " + className}>
+    <table
+      className={classNames("border-separate border-spacing-0", className)}
+    >
       <thead className="rounded-t-lg">
         <tr>
           {columnNames.map((columnName, index) => {
