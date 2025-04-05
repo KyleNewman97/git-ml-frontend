@@ -1,3 +1,3 @@
 import { vi } from "vitest";
 
-vi.stubEnv("BACKEND_URL", "http://localhost:8000");
+vi.stubEnv("VITE_BACKEND_URL", "http://localhost:8000");
