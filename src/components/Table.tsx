@@ -5,6 +5,7 @@ import { DoubleArrowLeft } from "./icons/DoubleArrowLeft";
 import { DoubleArrowRight } from "./icons/DoubleArrowRight";
 import { ArrowLeft } from "./icons/ArrowLeft";
 import { ArrowRight } from "./icons/ArrowRight";
+import { Dropdown, DropdownButton, DropdownMenu } from "./DropdownButton";
 
 export const Table = ({
   columnNames,
@@ -105,11 +106,18 @@ export const Table = ({
         </tbody>
       </table>
 
-      <PageNavigator
-        pageIndex={pageIndex}
-        numPages={numPages ?? 1}
-        setPageIndex={setPageIndex}
-      />
+      <div className="flex justify-between">
+        <Dropdown>
+          <DropdownButton>Page</DropdownButton>
+          <DropdownMenu></DropdownMenu>
+        </Dropdown>
+
+        <PageNavigator
+          pageIndex={pageIndex}
+          numPages={numPages ?? 1}
+          setPageIndex={setPageIndex}
+        />
+      </div>
     </div>
   );
 };
@@ -124,40 +132,40 @@ const PageNavigator = ({
   setPageIndex: Dispatch<SetStateAction<number>>;
 }) => {
   return (
-    <div className="mt-8 self-end flex gap-1">
-      <div
+    <div className="mt-8 flex gap-1">
+      <button
         className="flex justify-center items-center w-10 h-10 rounded-l-md border-2 border-table-outline bg-table-highlight cursor-pointer hover:bg-table-main active:bg-table-outline"
         onClick={() => setPageIndex(1)}
         hidden={pageIndex === 1}
       >
         <DoubleArrowLeft className="w-3/4 h-3/4" />
-      </div>
-      <div
+      </button>
+      <button
         className="flex justify-center items-center w-10 h-10 border-2 border-table-outline bg-table-highlight cursor-pointer hover:bg-table-main active:bg-table-outline"
         onClick={() => setPageIndex((idx) => Math.max(idx - 1, 1))}
         hidden={pageIndex === 1}
       >
         <ArrowLeft className="w-1/2 h-1/2" />
-      </div>
+      </button>
 
       <div className="w-20 h-10 bg-table-main border-2 border-table-outline flex justify-center items-center select-none">
         {`${pageIndex} / ${numPages}`}
       </div>
 
-      <div
+      <button
         className="flex justify-center items-center w-10 h-10 border-2 border-table-outline bg-table-highlight cursor-pointer hover:bg-table-main active:bg-table-outline"
         onClick={() => setPageIndex((idx) => Math.min(idx + 1, numPages ?? 1))}
         hidden={pageIndex === numPages}
       >
         <ArrowRight className="w-1/2 h-1/2" />
-      </div>
-      <div
+      </button>
+      <button
         className="flex justify-center items-center w-10 h-10 rounded-r-md border-2 border-table-outline bg-table-highlight cursor-pointer hover:bg-table-main active:bg-table-outline"
         onClick={() => setPageIndex(numPages)}
         hidden={pageIndex === numPages}
       >
         <DoubleArrowRight className="w-3/4 h-3/4" />
-      </div>
+      </button>
     </div>
   );
 };
