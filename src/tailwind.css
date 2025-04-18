@@ -1,1 +1,9 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+@theme {
+  --color-main: rgb(4, 9, 19);
+  --color-table-main: rgb(20, 24, 31);
+  --color-table-highlight: rgb(32, 36, 43);
+  --color-table-outline: rgb(120, 120, 120);
+  --color-primary-text: rgb(255, 255, 255);
+}
