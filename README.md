@@ -27,3 +27,9 @@ To run tests:
 ```bash
 npm run test
 ```
+
+Trunk has been used to format as well as do static code analysis. To run trunk use:
+
+```bash
+npm exec trunk check
+```

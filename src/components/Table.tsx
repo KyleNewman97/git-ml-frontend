@@ -33,13 +33,13 @@ export const Table = ({
 
   useEffect(() => {
     loadData(pageIndex - 1, pageSize).then((data) => setData(data));
-  }, [pageIndex, pageSize]);
+  }, [pageIndex, pageSize, loadData, setData]);
 
   useEffect(() => {
     getSampleCount().then((count) => {
       setNumPages(Math.ceil(count / pageSize));
     });
-  }, [pageSize]);
+  }, [pageSize, getSampleCount, setNumPages]);
 
   return (
     <div className={classNames("flex flex-col", className)}>
