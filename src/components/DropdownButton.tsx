@@ -6,9 +6,6 @@ import {
   SetStateAction,
   useCallback,
   useContext,
-  useEffect,
-  useRef,
-  useState,
 } from "react";
 import { classNames } from "../utils/utils-string";
 import { ArrowDown } from "./icons/ArrowDown";
@@ -57,7 +54,7 @@ export const DropdownButton = ({
 
   const toggleIsOpen = useCallback(() => {
     dropdownContext.setIsOpen((isOpen) => !isOpen);
-  }, [dropdownContext.setIsOpen]);
+  }, [dropdownContext]);
 
   return (
     <button
