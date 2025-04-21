@@ -24,10 +24,12 @@ export const Table = ({
   defaultPageSize?: number;
   pageSizes: number[];
 }) => {
+  const allowedPageSizes = [10, 20, 50, 100];
   const [pageIndex, setPageIndex] = useState(1);
   const [pageSize, setPageSize] = useState(
     defaultPageSize ?? (pageSizes.length === 0 ? 10 : pageSizes[0]),
   );
+  const [pageDropdownOpen, setPageDropdownOpen] = useState(false);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [data, setData] = useState<TableData[]>([]);
 
@@ -107,12 +109,33 @@ export const Table = ({
       </table>
 
       <div className="flex justify-between">
-        <Dropdown>
-          <DropdownButton>Page</DropdownButton>
-          <DropdownMenu></DropdownMenu>
+        <Dropdown
+          className="mt-8"
+          isOpen={pageDropdownOpen}
+          setIsOpen={setPageDropdownOpen}
+        >
+          <DropdownButton>{`${pageSize} items per page`}</DropdownButton>
+          <DropdownMenu>
+            {allowedPageSizes.map((ps) => {
+              return (
+                <button
+                  key={ps}
+                  className="py-2 cursor-pointer hover:bg-table-main active:bg-table-outline w-20"
+                  onClick={() => {
+                    setPageIndex(1);
+                    setPageSize(ps);
+                    setPageDropdownOpen(false);
+                  }}
+                >
+                  {ps}
+                </button>
+              );
+            })}
+          </DropdownMenu>
         </Dropdown>
 
         <PageNavigator
+          className="mt-8"
           pageIndex={pageIndex}
           numPages={numPages ?? 1}
           setPageIndex={setPageIndex}
@@ -123,16 +146,18 @@ export const Table = ({
 };
 
 const PageNavigator = ({
+  className,
   pageIndex,
   numPages,
   setPageIndex,
 }: {
+  className?: string;
   pageIndex: number;
   numPages: number;
   setPageIndex: Dispatch<SetStateAction<number>>;
 }) => {
   return (
-    <div className="mt-8 flex gap-1">
+    <div className={classNames("flex gap-1", className)}>
       <button
         className="flex justify-center items-center w-10 h-10 rounded-l-md border-2 border-table-outline bg-table-highlight cursor-pointer hover:bg-table-main active:bg-table-outline"
         onClick={() => setPageIndex(1)}
